@@ -149,7 +149,8 @@ function abrir(nome, { rolar = true, animar = true } = {}) {
   });
   pasta.dataset.ativa = nome;
   observar(document.querySelector(`[data-painel="${nome}"]`));
-  if (location.hash !== `#${nome}`) history.replaceState(null, "", `#${nome}`);
+  // mantém o endereço limpo (sem #sobre, #trabalhos...); links com # continuam funcionando ao abrir
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 }
 
 document.querySelectorAll("[data-ir]").forEach((el) =>
